@@ -8,9 +8,12 @@ namespace Com.Potterf.FpsGame
 
     public class Gun : ScriptableObject
     {
+        #region Variables
         public new string name;
         public GameObject prefab;
         public float firerate;
         //other gun attributes here
+        #endregion
+
     }
 }

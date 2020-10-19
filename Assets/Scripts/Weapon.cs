@@ -6,15 +6,14 @@ namespace Com.Potterf.FpsGame
 {
     public class Weapon : MonoBehaviour
     {
+        #region Variables
         public Gun[] loadout;
         public Transform weaponParent;
 
         private GameObject currentWeapon;
-        void Start()
-        {
+        #endregion
 
-        }
-
+        #region MonoBehaviour Callbacks
 
         void Update()
         {
@@ -30,5 +29,8 @@ namespace Com.Potterf.FpsGame
 
             currentWeapon = t_newWeapon;
         }
+
+        #endregion
+
     }
 }

@@ -6,6 +6,7 @@ namespace Com.Potterf.FpsGame
 {
     public class Look : MonoBehaviour
     {
+        #region Variables
         public static bool cursorLocked = true;
 
         public Transform player;
@@ -17,27 +18,31 @@ namespace Com.Potterf.FpsGame
         public float maxAngle;
 
         private Quaternion camCenter;
+        #endregion
 
-         void Start()
+        #region MonoBehaviour Callbacks
+        void Start()
         {
             camCenter = cams.localRotation;
         }
 
-         void Update()
+        void Update()
         {
             SetY();
             SetX();
             UpdateCursorLock();
         }
+        #endregion
 
+        #region Private Methods
         void SetY()
         {
             //this affects the camera(player view) up and down, with clamping to limit viewspace
-            float t_input = Input.GetAxis("Mouse Y") *  ySensitivity * Time.deltaTime;
+            float t_input = Input.GetAxis("Mouse Y") * ySensitivity * Time.deltaTime;
             Quaternion t_adj = Quaternion.AngleAxis(t_input, -Vector3.right);
             Quaternion t_delta = cams.localRotation * t_adj;
-            
-            if(Quaternion.Angle(camCenter, t_delta) < maxAngle)
+
+            if (Quaternion.Angle(camCenter, t_delta) < maxAngle)
             {
                 cams.localRotation = t_delta;
             }
@@ -79,5 +84,7 @@ namespace Com.Potterf.FpsGame
 
             }
         }
+        #endregion
+
     }
 }
