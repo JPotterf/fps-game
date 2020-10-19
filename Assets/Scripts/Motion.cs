@@ -11,6 +11,8 @@ namespace Com.Potterf.FpsGame
         public float sprintModifier;
         public float jumpForce;
         public Camera normalCam;
+        public Transform groundDetector;
+        public LayerMask ground;
 
         private Rigidbody rig;
         private float baseFOV;
@@ -35,11 +37,12 @@ namespace Com.Potterf.FpsGame
 
             //controls
             bool t_sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-            bool t_jump = Input.GetKeyDown(KeyCode.Space);
+            bool t_jump = Input.GetKey(KeyCode.Space);
 
             //state
-            bool isJumping = t_jump;
-            bool isSprinting = t_sprint && t_vmove > 0 && !isJumping;
+            bool isGrounded = Physics.Raycast(groundDetector.position.normalized, Vector3.down, 0.1f, ground);
+            bool isJumping = t_jump && isGrounded;
+            bool isSprinting = t_sprint && t_vmove > 0 && !isJumping && isGrounded;
             
 
             //jumping

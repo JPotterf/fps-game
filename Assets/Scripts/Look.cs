@@ -10,6 +10,7 @@ namespace Com.Potterf.FpsGame
 
         public Transform player;
         public Transform cams;
+        public Transform weapon;
 
         public float xSensitivity;
         public float ySensitivity;
@@ -38,8 +39,10 @@ namespace Com.Potterf.FpsGame
             
             if(Quaternion.Angle(camCenter, t_delta) < maxAngle)
             {
-                cams.localRotation = t_delta;   
-            }    
+                cams.localRotation = t_delta;
+            }
+
+            weapon.rotation = cams.rotation;
         }
 
         void SetX()
