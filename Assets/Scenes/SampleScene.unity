@@ -873,7 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1000
   sprintModifier: 1.25
-  jumpForce: 50
+  jumpForce: 100
   normalCam: {fileID: 1698239244}
   groundDetector: {fileID: 764672742}
   ground:

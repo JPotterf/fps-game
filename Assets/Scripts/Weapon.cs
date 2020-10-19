@@ -19,6 +19,11 @@ namespace Com.Potterf.FpsGame
         {
             if (Input.GetKeyDown(KeyCode.Alpha1)) Equip(0);
         }
+
+
+        #endregion
+
+        #region Private Methods
         void Equip(int p_ind)
         {
 
@@ -29,8 +34,6 @@ namespace Com.Potterf.FpsGame
 
             currentWeapon = t_newWeapon;
         }
-
         #endregion
-
     }
 }
