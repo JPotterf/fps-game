@@ -10,6 +10,7 @@ namespace Com.Potterf.FpsGame
         public Gun[] loadout;
         public Transform weaponParent;
 
+        private int currentIndex;
         private GameObject currentWeapon;
         #endregion
 
@@ -18,6 +19,12 @@ namespace Com.Potterf.FpsGame
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1)) Equip(0);
+
+            if (currentWeapon != null)
+            {
+                Aim(Input.GetMouseButton(1));
+            }
+            
         }
 
 
@@ -28,11 +35,31 @@ namespace Com.Potterf.FpsGame
         {
 
             if (currentWeapon != null) Destroy(currentWeapon);
+
+            //currentIndex is the weapon that is currently equiped from the Gun[] array
+            currentIndex = p_ind;
             GameObject t_newWeapon = Instantiate(loadout[p_ind].prefab, weaponParent.position, weaponParent.rotation, weaponParent) as GameObject;
             t_newWeapon.transform.localPosition = Vector3.zero;
             t_newWeapon.transform.localEulerAngles = Vector3.zero;
 
             currentWeapon = t_newWeapon;
+        }
+
+        void Aim(bool p_isAiming)
+        {
+            Transform t_anchor = currentWeapon.transform.Find("Anchor");
+            Transform t_state_ads = currentWeapon.transform.Find("States/ADS");
+            Transform t_state_hip = currentWeapon.transform.Find("States/Hip");
+            if (p_isAiming)
+            {
+                //aim
+                t_anchor.position = Vector3.Lerp(t_anchor.position, t_state_ads.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
+            }
+            else
+            {
+                //hipshot
+                t_anchor.position = Vector3.Lerp(t_anchor.position, t_state_hip.position, Time.deltaTime * loadout[currentIndex].aimSpeed);
+            }
         }
         #endregion
     }
