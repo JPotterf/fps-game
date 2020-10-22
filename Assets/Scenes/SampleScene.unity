@@ -595,7 +595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 159174795}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Misc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +757,7 @@ GameObject:
   - component: {fileID: 285129818}
   - component: {fileID: 285129820}
   - component: {fileID: 285129821}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,6 +913,11 @@ MonoBehaviour:
   loadout:
   - {fileID: 11400000, guid: ed6499a5e2067bb478989a7d9c7f89a3, type: 2}
   weaponParent: {fileID: 2056264562}
+  bulletHolePrefab: {fileID: 3186657243599953000, guid: 29443a9d2e04c6f41995a99c412f9a16,
+    type: 3}
+  canBeShot:
+    serializedVersion: 2
+    m_Bits: 311
 --- !u!1 &336547803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,7 +1703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 618103686}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cameras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1821,7 +1826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 764672742}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundDetect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3747,8 +3752,8 @@ GameObject:
   - component: {fileID: 1698239242}
   - component: {fileID: 1698239244}
   - component: {fileID: 1698239243}
-  m_Layer: 0
-  m_Name: MainCamera
+  m_Layer: 9
+  m_Name: NormalCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4696,7 +4701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2045193467}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Design
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4820,7 +4825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2056264562}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4945,7 +4950,7 @@ GameObject:
   - component: {fileID: 2070977059}
   - component: {fileID: 2070977061}
   - component: {fileID: 2070977060}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
