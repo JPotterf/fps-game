@@ -13,6 +13,10 @@ namespace Com.Potterf.FpsGame
         public GameObject prefab;
         public float firerate;
         public float aimSpeed;
+
+        public float bloom;
+        public float recoil;
+        public float kickback;
         //other gun attributes here
         #endregion
 
