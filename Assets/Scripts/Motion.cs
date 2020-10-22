@@ -13,11 +13,16 @@ namespace Com.Potterf.FpsGame
         public float jumpForce;
         public Camera normalCam;
         public Transform groundDetector;
+        public Transform weaponParent;
         public LayerMask ground;
 
         private Rigidbody rig;
         private float baseFOV;
+        private Vector3 weaponParentOrigin;
+        private Vector3 targetWeaponBobPosition;
         private float sprintFOVModifier = 1.15f;
+        private float movementCounter;
+        private float idleCounter;
 
         #endregion
 
@@ -28,6 +33,7 @@ namespace Com.Potterf.FpsGame
             Camera.main.enabled = false;
 
             rig = GetComponent<Rigidbody>();
+            weaponParentOrigin = weaponParent.localPosition;
         }
 
 
@@ -52,6 +58,28 @@ namespace Com.Potterf.FpsGame
             {
                 rig.AddForce(Vector3.up * jumpForce);
             }
+
+            //headbob
+            //idle headbob
+            if (t_hmove == 0 && t_vmove == 0)
+            {
+                HeadBob(idleCounter, .01f,.01f);
+                idleCounter += Time.deltaTime;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetWeaponBobPosition, Time.deltaTime * 2f);
+            }
+            else if (!isSprinting) //not sprinting movement headbob/breathing 
+            {
+                HeadBob(movementCounter, .05f, .05f);
+                movementCounter += Time.deltaTime * 2f;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetWeaponBobPosition, Time.deltaTime * 6f);
+            }
+            else // sprinting movement headbob/breathing 
+            {
+                HeadBob(movementCounter, .09f, .075f);
+                movementCounter += Time.deltaTime * 7f;
+                weaponParent.localPosition = Vector3.Lerp(weaponParent.localPosition, targetWeaponBobPosition, Time.deltaTime * 10f);
+            }
+
         }
 
         void FixedUpdate()
@@ -95,5 +123,12 @@ namespace Com.Potterf.FpsGame
         }
         #endregion
 
+        #region Private Methods
+        void HeadBob(float p_z, float p_x_intensity, float p_y_intensity)
+        {
+            //p_z is location on sin wave
+            targetWeaponBobPosition = weaponParentOrigin + new Vector3(Mathf.Cos(p_z) * p_x_intensity, Mathf.Sin(p_z * 2) * p_y_intensity, 0); 
+        }
+        #endregion
     }
 }

@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Pistol
   prefab: {fileID: 2623622416115327715, guid: f551dd01775cb284fa5382cc702c60a6, type: 3}
   firerate: 99
-  aimSpeed: 7
+  aimSpeed: 10
