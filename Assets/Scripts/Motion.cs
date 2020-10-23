@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 
 namespace Com.Potterf.FpsGame
 {
-    public class Motion : MonoBehaviour
+    public class Motion : MonoBehaviourPunCallbacks
     {
         #region Variables
         public float speed;
@@ -39,6 +40,11 @@ namespace Com.Potterf.FpsGame
 
         private void Update()
         {
+            if (!photonView.IsMine)
+            {
+                return;
+            } 
+
             //TODO: dry this up, add functions for this repetition
             //axis input
             float t_hmove = Input.GetAxisRaw("Horizontal");
@@ -84,6 +90,10 @@ namespace Com.Potterf.FpsGame
 
         void FixedUpdate()
         {
+            if (!photonView.IsMine)
+            {
+                return;
+            }
             //axis input
             float t_hmove = Input.GetAxisRaw("Horizontal");
             float t_vmove = Input.GetAxisRaw("Vertical");
