@@ -13,6 +13,7 @@ namespace Com.Potterf.FpsGame
         public float sprintModifier;
         public float jumpForce;
         public Camera normalCam;
+        public GameObject cameraParent;
         public Transform groundDetector;
         public Transform weaponParent;
         public LayerMask ground;
@@ -29,9 +30,16 @@ namespace Com.Potterf.FpsGame
 
         #region MonoBehaviour Callbacks
         void Start()
-        {
+        {   
+            //sets the prefab player cam to active of the networked player
+            cameraParent.SetActive(photonView.IsMine);
+
             baseFOV = normalCam.fieldOfView;
-            Camera.main.enabled = false;
+            if (Camera.main)
+            {
+                Camera.main.enabled = false;
+            }
+            
 
             rig = GetComponent<Rigidbody>();
             weaponParentOrigin = weaponParent.localPosition;

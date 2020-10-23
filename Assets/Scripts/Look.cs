@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Com.Potterf.FpsGame
 {
-    public class Look : MonoBehaviour
+    public class Look : MonoBehaviourPunCallbacks
     {
         #region Variables
         public static bool cursorLocked = true;
@@ -28,6 +29,7 @@ namespace Com.Potterf.FpsGame
 
         void Update()
         {
+            if (!photonView.IsMine) return;
             SetY();
             SetX();
             UpdateCursorLock();

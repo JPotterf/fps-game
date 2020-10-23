@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace Com.Potterf.FpsGame
 {
     [CreateAssetMenu(fileName = "New Gun", menuName = "Gun")]
