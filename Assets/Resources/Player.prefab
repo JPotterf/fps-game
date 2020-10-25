@@ -402,7 +402,7 @@ MonoBehaviour:
     type: 3}
   canBeShot:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 2359
 --- !u!114 &-2342535074766050702
 MonoBehaviour:
   m_ObjectHideFlags: 0

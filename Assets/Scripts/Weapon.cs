@@ -23,7 +23,12 @@ namespace Com.Potterf.FpsGame
         void Update()
         {
             if (!photonView.IsMine) return;
-            if (Input.GetKeyDown(KeyCode.Alpha1)) Equip(0);
+            
+            //equip gun
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                photonView.RPC("Equip", RpcTarget.All, 0);
+            }
 
             if (currentWeapon != null)
             {
@@ -31,7 +36,9 @@ namespace Com.Potterf.FpsGame
 
                 if (Input.GetMouseButtonDown(0) && currentCooldown <= 0)
                 {
-                    Shoot();
+                    //Shoot();
+                    photonView.RPC("Shoot", RpcTarget.All);
+                    
                 }
 
                 //return weapon to neutral position
@@ -42,13 +49,15 @@ namespace Com.Potterf.FpsGame
                     currentCooldown -= Time.deltaTime;
                 }
             }
-            
+
         }
 
 
         #endregion
 
         #region Private Methods
+
+        [PunRPC]
         void Equip(int p_ind)
         {
 
@@ -82,6 +91,7 @@ namespace Com.Potterf.FpsGame
             }
         }
 
+        [PunRPC]
         void Shoot()
         {
             Transform t_spawn = transform.Find("Cameras/NormalCamera");
@@ -99,6 +109,16 @@ namespace Com.Potterf.FpsGame
                 GameObject t_newHole = Instantiate(bulletHolePrefab, t_hit.point + t_hit.normal * 0.001f, Quaternion.identity) as GameObject;
                 t_newHole.transform.LookAt(t_hit.point + t_hit.normal);
                 Destroy(t_newHole, 5f);
+
+                if (photonView.IsMine)
+                {
+                    //if shooting player over network
+                    if (t_hit.collider.gameObject.layer == 11)
+                    {
+                        //rpc to dmg other networked players
+                    }
+                }
+                
             }
 
             //gun fx

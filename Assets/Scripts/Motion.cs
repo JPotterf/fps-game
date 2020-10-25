@@ -30,9 +30,15 @@ namespace Com.Potterf.FpsGame
 
         #region MonoBehaviour Callbacks
         void Start()
-        {   
+        {
             //sets the prefab player cam to active of the networked player
             cameraParent.SetActive(photonView.IsMine);
+
+            if (!photonView.IsMine)
+            {
+                //if gameObject is not the active player, set to layer 11 => a game object that can be shot.
+                gameObject.layer = 11;
+            }
 
             baseFOV = normalCam.fieldOfView;
             if (Camera.main)
