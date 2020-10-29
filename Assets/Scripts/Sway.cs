@@ -10,6 +10,7 @@ namespace Com.Potterf.FpsGame
         #region Variables
         public float intensity;
         public float smooth;
+        public bool isMine;
 
         private Quaternion origin_rotation;
         #endregion
@@ -36,6 +37,14 @@ namespace Com.Potterf.FpsGame
             //controls
             float t_x_mouse = Input.GetAxis("Mouse X");
             float t_y_mouse = Input.GetAxis("Mouse Y");
+
+            if (!isMine)
+            {
+                t_x_mouse = 0;
+                t_y_mouse = 0;
+            }
+
+
 
             //calc target rotation
             Quaternion t_x_adj = Quaternion.AngleAxis(-intensity * t_x_mouse, Vector3.up);

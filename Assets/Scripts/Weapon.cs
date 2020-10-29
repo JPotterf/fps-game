@@ -69,7 +69,7 @@ namespace Com.Potterf.FpsGame
             t_newWeapon.transform.localPosition = Vector3.zero;
             t_newWeapon.transform.localEulerAngles = Vector3.zero;
 
-            t_newWeapon.GetComponent<Sway>().enabled = photonView.IsMine;
+            t_newWeapon.GetComponent<Sway>().isMine = photonView.IsMine;
 
             currentWeapon = t_newWeapon;
         }
@@ -115,7 +115,9 @@ namespace Com.Potterf.FpsGame
                     //if shooting player over network
                     if (t_hit.collider.gameObject.layer == 11)
                     {
-                        //rpc to dmg other networked players
+                        //t_hit is raycast collider -> this chain accesses the game object that was struck by the raycast
+                        //apply dmg to the struck player/game object
+                        t_hit.collider.gameObject.GetPhotonView().RPC("TakeDamage", RpcTarget.All, loadout[currentIndex].damage);
                     }
                 }
                 
@@ -128,6 +130,13 @@ namespace Com.Potterf.FpsGame
             //cooldown
             currentCooldown = loadout[currentIndex].firerate;
         }
+
+        [PunRPC]
+        private void TakeDamage(int p_damage)
+        {
+            GetComponent<Motion>().TakeDamage(p_damage);
+        }
+
         #endregion
     }
 }

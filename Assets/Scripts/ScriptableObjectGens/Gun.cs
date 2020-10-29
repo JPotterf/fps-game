@@ -11,6 +11,7 @@ namespace Com.Potterf.FpsGame
     {
         #region Variables
         public new string name;
+        public int damage;
         public GameObject prefab;
         public float firerate;
         public float aimSpeed;

@@ -12,6 +12,7 @@ namespace Com.Potterf.FpsGame
         public float speed;
         public float sprintModifier;
         public float jumpForce;
+        public int max_health;
         public Camera normalCam;
         public GameObject cameraParent;
         public Transform groundDetector;
@@ -26,11 +27,15 @@ namespace Com.Potterf.FpsGame
         private float movementCounter;
         private float idleCounter;
 
+        private int current_health;
+
         #endregion
 
         #region MonoBehaviour Callbacks
         void Start()
         {
+
+            current_health = max_health;
             //sets the prefab player cam to active of the networked player
             cameraParent.SetActive(photonView.IsMine);
 
@@ -153,6 +158,25 @@ namespace Com.Potterf.FpsGame
             //p_z is location on sin wave
             targetWeaponBobPosition = weaponParentOrigin + new Vector3(Mathf.Cos(p_z) * p_x_intensity, Mathf.Sin(p_z * 2) * p_y_intensity, 0); 
         }
+        #endregion
+
+        #region Public Methods
+
+        
+        public void TakeDamage(int p_damage)
+        {
+            if (photonView.IsMine)
+            {
+                current_health -= p_damage;
+                Debug.Log(current_health);
+
+                if (current_health <=0)
+                {
+                    Debug.Log("Dead");
+                }
+            }        
+        }
+
         #endregion
     }
 }

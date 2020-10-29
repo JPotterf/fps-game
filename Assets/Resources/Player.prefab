@@ -342,6 +342,7 @@ MonoBehaviour:
   speed: 500
   sprintModifier: 1.25
   jumpForce: 25
+  max_health: 10
   normalCam: {fileID: 7894045478103572911}
   cameraParent: {fileID: 7894045479171453222}
   groundDetector: {fileID: 7894045479318489157}
